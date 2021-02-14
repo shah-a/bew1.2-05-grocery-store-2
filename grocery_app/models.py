@@ -20,10 +20,10 @@ class GroceryStore(db.Model):
     items = db.relationship('GroceryItem', back_populates='store')
 
     def __str__(self):
-        return f'<Store: {self.name}>'
+        return f'<Store: {self.title}>'
 
     def __repr__(self):
-        return f'<Store: {self.name}>'
+        return f'<Store: {self.title}>'
 
 class GroceryItem(db.Model):
     """Grocery Item model."""
