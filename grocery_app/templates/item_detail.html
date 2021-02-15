@@ -16,43 +16,7 @@
 <h2>Edit Item</h2>
 
 <form method="POST" action="{{ url_for('main.item_detail', item_id=item.id) }}">
-  {{ form.csrf_token }}
-  <fieldset>
-    <legend>Item Information:</legend>
-
-    {{ form.name.label }}
-    {{ form.name }}
-    <ul>
-      {% for error in form.name.errors %}
-        <li class="error">{{ error }}</li>
-      {% endfor %}
-    </ul>
-
-    {{ form.price.label }}
-    {{ form.price }}
-    <ul>
-      {% for error in form.price.errors %}
-        <li class="error">{{ error }}</li>
-      {% endfor %}
-    </ul>
-
-    {{ form.category.label }}
-    {{ form.category }}
-
-    {{ form.photo_url.label }}
-    {{ form.photo_url }}
-    <ul>
-      {% for error in form.photo_url.errors %}
-        <li class="error">{{ error }}</li>
-      {% endfor %}
-    </ul>
-
-    {{ form.store.label }}
-    {{ form.store }}
-
-    {{ form.submit}}
-
-  </fieldset>
+  {% include 'item_form.html' %}
 </form>
 
 {% endblock %}

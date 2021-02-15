@@ -15,6 +15,6 @@ class GroceryItemForm(FlaskForm):
     name = StringField('Item Name', validators=[DataRequired(), Length(max=80)])
     price = FloatField ('Item Price', validators=[DataRequired()])
     category = SelectField('Item Category', choices=ItemCategory.choices())
-    photo_url = StringField('Photo URL', validators=[URL()])
+    photo_url = StringField('Photo URL', validators=[DataRequired(), URL()])
     store = QuerySelectField('Locations Available', query_factory=lambda: GroceryStore.query)
     submit = SubmitField('Submit')
