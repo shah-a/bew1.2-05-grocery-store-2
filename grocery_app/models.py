@@ -18,6 +18,12 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
+    def __str__(self):
+        return f'<User: {self.username}>'
+
+    def __repr__(self):
+        return f'<User: {self.username}>'
+
 class GroceryStore(db.Model):
     """Grocery Store model."""
     id = db.Column(db.Integer, primary_key=True)
