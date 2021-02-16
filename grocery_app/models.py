@@ -1,4 +1,5 @@
 from sqlalchemy_utils import URLType
+from flask_login import UserMixin
 
 from grocery_app import db
 from grocery_app.utils import FormEnum
@@ -12,7 +13,7 @@ class ItemCategory(FormEnum):
     FROZEN = 'Frozen'
     OTHER = 'Other'
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(200), nullable=False)
@@ -40,8 +41,7 @@ class GroceryItem(db.Model):
     price = db.Column(db.Float(precision=2), nullable=False)
     category = db.Column(db.Enum(ItemCategory), default=ItemCategory.OTHER)
     photo_url = db.Column(URLType)
-    store_id = db.Column(
-        db.Integer, db.ForeignKey('grocery_store.id'), nullable=False)
+    store_id = db.Column(db.Integer, db.ForeignKey('grocery_store.id'), nullable=False)
     store = db.relationship('GroceryStore', back_populates='items')
 
     added_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))

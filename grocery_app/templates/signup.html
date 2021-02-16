@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Sign Up</h1>
+
+<form method="POST" action="{{ url_for('auth.signup') }}">
+  {% include 'credentials_form.html' %}
+</form>
+
+{% endblock %}
