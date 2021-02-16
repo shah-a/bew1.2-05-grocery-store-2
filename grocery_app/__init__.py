@@ -30,9 +30,10 @@ def load_user(user_id):
 # Blueprints
 ###########################
 
-# from grocery_app.auth.routes import auth
-from grocery_app.routes import main
-# app.register_blueprint(auth)
+from grocery_app.auth.routes import auth
+from grocery_app.main.routes import main
+
+app.register_blueprint(auth)
 app.register_blueprint(main)
 
 with app.app_context():

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from grocery_app.models import GroceryStore, GroceryItem, ItemCategory
-from grocery_app.forms import GroceryStoreForm, GroceryItemForm
+from grocery_app.main.forms import GroceryStoreForm, GroceryItemForm
 from grocery_app import db
 
 main = Blueprint("main", __name__)
