@@ -12,12 +12,20 @@ class ItemCategory(FormEnum):
     FROZEN = 'Frozen'
     OTHER = 'Other'
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
 class GroceryStore(db.Model):
     """Grocery Store model."""
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
     address = db.Column(db.String(200), nullable=False)
     items = db.relationship('GroceryItem', back_populates='store')
+
+    added_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    added_by = db.relationship('User')
 
     def __str__(self):
         return f'<Store: {self.title}>'
@@ -35,6 +43,9 @@ class GroceryItem(db.Model):
     store_id = db.Column(
         db.Integer, db.ForeignKey('grocery_store.id'), nullable=False)
     store = db.relationship('GroceryStore', back_populates='items')
+
+    added_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    added_by = db.relationship('User')
 
     def __str__(self):
         return f'<Item: {self.name}>'
