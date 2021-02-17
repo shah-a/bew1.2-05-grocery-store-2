@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 from grocery_app.models import GroceryStore, GroceryItem
 from grocery_app.main.forms import GroceryStoreForm, GroceryItemForm
@@ -93,7 +93,7 @@ def item_detail(item_id):
 @main.route('/shopping_list')
 @login_required
 def shopping_list():
-    return "Not implemented yet"
+    return render_template('shopping_list.html')
 
 @main.route('/add_to_shopping_list/<item_id>', methods=['POST'])
 @login_required
@@ -115,4 +115,4 @@ def remove_from_shopping_list(item_id):
     db.session.commit()
 
     flash("Item removed from shopping list.")
-    return redirect(url_for('main.item_detail', item_id=item_id))
+    return redirect(request.referrer)
