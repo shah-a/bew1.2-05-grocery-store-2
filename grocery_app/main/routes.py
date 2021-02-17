@@ -89,3 +89,30 @@ def item_detail(item_id):
         return redirect(url_for('main.item_detail', item_id=item.id))
 
     return render_template('item_detail.html', item=item, form=form)
+
+@main.route('/shopping_list')
+@login_required
+def shopping_list():
+    return "Not implemented yet"
+
+@main.route('/add_to_shopping_list/<item_id>', methods=['POST'])
+@login_required
+def add_to_shopping_list(item_id):
+    item = GroceryItem.query.get(item_id)
+
+    current_user.shopping_list_items.append(item)
+    db.session.commit()
+
+    flash("Item added to shopping list.")
+    return redirect(url_for('main.item_detail', item_id=item_id))
+
+@main.route('/remove_from_shopping_list/<item_id>', methods=['POST'])
+@login_required
+def remove_from_shopping_list(item_id):
+    item = GroceryItem.query.get(item_id)
+
+    current_user.shopping_list_items.remove(item)
+    db.session.commit()
+
+    flash("Item removed from shopping list.")
+    return redirect(url_for('main.item_detail', item_id=item_id))
